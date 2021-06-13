@@ -5,7 +5,7 @@ from heapq import heappush, heappop
 
 class RunningStats:
     def __init__(self):
-        self.c = 0
+        self.count = 0
         self.aggregated_sum = 0
         self.aggregated_sumsq = 0
         self.lowers, self.highers = [], []
@@ -17,7 +17,7 @@ class RunningStats:
         :param new_value: new user input
         :return: n/a
         """
-        self.c += 1
+        self.count += 1
         self.aggregated_sum += new_value
         self.aggregated_sumsq += new_value ** 2
         if not self.highers or new_value > self.highers[0]:
@@ -35,7 +35,7 @@ class RunningStats:
 
         :return: mean
         """
-        return self.aggregated_sum / self.c
+        return self.aggregated_sum / self.count
 
     def get_std(self):
         """
@@ -43,7 +43,7 @@ class RunningStats:
 
         :return: standard deviation
         """
-        return sqrt((self.aggregated_sumsq - self.aggregated_sum ** 2 / self.c) / self.c)
+        return sqrt((self.aggregated_sumsq - self.aggregated_sum ** 2 / self.count) / self.count)
 
     def get_median(self):
         """
